@@ -9,7 +9,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/chainkorea/open-callisto-pool/util"
+	"github.com/esprezzo/open-perkle-pool/util"
 )
 
 const (

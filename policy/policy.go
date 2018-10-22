@@ -9,8 +9,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/chainkorea/open-callisto-pool/storage"
-	"github.com/chainkorea/open-callisto-pool/util"
+	"github.com/esprezzo/open-perkle-pool/storage"
+	"github.com/esprezzo/open-perkle-pool/util"
 )
 
 type Config struct {

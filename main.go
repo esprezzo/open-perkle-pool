@@ -12,10 +12,11 @@ import (
 	"time"
 
 	"github.com/yvasiyarov/gorelic"
-	// "github.com/chainkorea/open-callisto-pool/api"
-	// "github.com/chainkorea/open-callisto-pool/payouts"
-	// "github.com/chainkorea/open-callisto-pool/proxy"
-	// "github.com/chainkorea/open-callisto-pool/storage"
+
+	"github.com/esprezzo/open-perkle-pool/api"
+	"github.com/esprezzo/open-perkle-pool/payouts"
+	"github.com/esprezzo/open-perkle-pool/proxy"
+	"github.com/esprezzo/open-perkle-pool/storage"
 )
 
 var cfg proxy.Config

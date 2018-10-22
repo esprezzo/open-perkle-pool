@@ -9,8 +9,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/chainkorea/open-callisto-pool/rpc"
-	"github.com/chainkorea/open-callisto-pool/util"
+	"github.com/esprezzo/open-perkle-pool/rpc"
+	"github.com/esprezzo/open-perkle-pool/util"
 )
 
 const maxBacklog = 3

@@ -13,10 +13,10 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/chainkorea/open-callisto-pool/policy"
-	"github.com/chainkorea/open-callisto-pool/rpc"
-	"github.com/chainkorea/open-callisto-pool/storage"
-	"github.com/chainkorea/open-callisto-pool/util"
+	"github.com/esprezzo/open-perkle-pool/policy"
+	"github.com/esprezzo/open-perkle-pool/rpc"
+	"github.com/esprezzo/open-perkle-pool/storage"
+	"github.com/esprezzo/open-perkle-pool/util"
 )
 
 type ProxyServer struct {
@@ -42,8 +42,8 @@ type Session struct {
 
 	// Stratum
 	sync.Mutex
-	conn  *net.TCPConn
-	login string
+	conn    *net.TCPConn
+	login   string
 	lastErr error
 }
 

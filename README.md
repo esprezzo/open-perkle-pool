@@ -1,13 +1,13 @@
-## Open Source Callisto (CLO) Mining Pool
+## Open Source Perkle (PRKL) Mining Pool
 
-![Main page of open-callisto-pool](https://raw.githubusercontent.com/ethpool-update-project/open-callisto-pool/master/misc/pool.PNG)
+![Main page of open-perkle-pool](https://raw.githubusercontent.com/esprezzo/open-perkle-pool/master/misc/pool.PNG)
 
-[![Build Status](https://api.travis-ci.org/ethpool-update-project/open-callisto-pool.svg?branch=master)](https://travis-ci.org/ethpool-update-project/open-callisto-pool)
-[![Report Card](https://goreportcard.com/badge/github.com/ethpool-update-project/open-callisto-pool)](https://goreportcard.com/report/github.com/ethpool-update-project/open-callisto-pool)
+[![Build Status](https://api.travis-ci.org/esprezzo/open-perkle-pool.svg?branch=master)](https://travis-ci.org/esprezzo/open-perkle-pool)
+[![Report Card](https://goreportcard.com/badge/github.com/esprezzo/open-perkle-pool)](https://goreportcard.com/report/github.com/esprezzo/open-perkle-pool)
 
 ### Features  
 
-**This pool is being further developed to provide an easy to use pool for Callisto miners. Testing and bug submissions are welcome!**
+**This pool is being further developed to provide an easy to use pool for Perkle miners. Testing and bug submissions are welcome!**
 
 * Support for HTTP and Stratum mining
 * Detailed block stats with luck percentage and full reward
@@ -24,7 +24,7 @@
 * [Ether-Proxy](https://github.com/sammy007/ether-proxy) HTTP proxy with web interface
 * [Stratum Proxy](https://github.com/Atrides/eth-proxy) for Ethereum
 
-## Guide to make your very own Callisto mining pool
+## Guide to make your very own Perkle mining pool
 
 ### Building on Linux
 
@@ -72,17 +72,17 @@ This will install the latest nodejs
 
 If you use Ubuntu, it is easier to control services by using serviced.
 
-    $ sudo nano /etc/systemd/system/callisto.service
+    $ sudo nano /etc/systemd/system/perkle.service
 
 Copy the following example
 
 ```
 [Unit]
-Description=Callisto for Pool
+Description=Perkle for Pool
 After=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/geth --callisto --cache=1024 --rpc --extradata "Mined by <your-pool-domain>" --ethstats "<your-pool-domain>:Callisto@clostats.net"
+ExecStart=/usr/local/bin/geth --perkle --cache=1024 --rpc --extradata "Mined by <your-pool-domain>" --ethstats "<your-pool-domain>:perkle@perlklestats.net"
 User=<your-user-name>
 
 [Install]
@@ -91,12 +91,12 @@ WantedBy=multi-user.target
 
 Then run multi-geth by the following commands
 
-    $ sudo systemctl enable callisto
-    $ sudo systemctl start callisto
+    $ sudo systemctl enable perkle
+    $ sudo systemctl start perkle
 
 If you want to debug the node command
 
-    $ sudo systemctl status callisto
+    $ sudo systemctl status perkle
 
 Run console
 
@@ -107,17 +107,17 @@ Register pool account and open wallet for transaction. This process is always re
     > personal.newAccount()
     > personal.unlockAccount(eth.accounts[0],"password",40000000)
 
-### Install Callisto Pool
+### Install Perkle Pool
 
-    $ git clone https://github.com/chainkorea/open-callisto-pool
-    $ cd open-callisto-pool
+    $ git clone https://github.com/esprezzo/open-perkle-pool
+    $ cd open-perkle-pool
     $ make all
 
-If you face open-callisto-pool after ls ~/open-callisto-pool/build/bin/, the installation has completed.
+If you see open-perkle-pool after ls ~/open-perkle-pool/build/bin/, the installation has completed.
 
-    $ ls ~/open-callisto-pool/build/bin/
+    $ ls ~/open-perkle-pool/build/bin/
 
-### Set up Callisto pool
+### Set up Perkle pool
 
     $ mv config.example.json config.json
     $ nano config.json
@@ -129,7 +129,7 @@ Set up based on commands below.
   // The number of cores of CPU.
   "threads": 2,
   // Prefix for keys in redis store
-  "coin": "clo",
+  "coin": "prkl",
   // Give unique name to each instance
   "name": "main",
   // PPLNS rounds
@@ -249,12 +249,12 @@ Set up based on commands below.
   "upstream": [
     {
       "name": "main",
-      "url": "http://127.0.0.1:8545",
+      "url": "http://127.0.0.1:8501",
       "timeout": "10s"
     },
     {
       "name": "backup",
-      "url": "http://127.0.0.2:8545",
+      "url": "http://127.0.0.2:8501",
       "timeout": "10s"
     }
   ],
@@ -262,9 +262,10 @@ Set up based on commands below.
   // This is standard redis connection options
   "redis": {
     // Where your redis instance is listening for commands
+    // NOTE THAT THE POOL IS CONFIGURED FOR Redis database "1"
     "endpoint": "127.0.0.1:6379",
     "poolSize": 10,
-    "database": 0,
+    "database": 1,
     "password": ""
   },
 
@@ -286,7 +287,7 @@ Set up based on commands below.
     // Run unlocker in this interval
     "interval": "10m",
     // Geth instance node rpc endpoint for unlocking blocks
-    "daemon": "http://127.0.0.1:8545",
+    "daemon": "http://127.0.0.1:8501",
     // Rise error if can't reach geth in this amount of time
     "timeout": "10s"
   },
@@ -299,7 +300,7 @@ Set up based on commands below.
     // Run payouts in this interval
     "interval": "12h",
     // Geth instance node rpc endpoint for payouts processing
-    "daemon": "http://127.0.0.1:8545",
+    "daemon": "http://127.0.0.1:8501",
     // Rise error if can't reach geth in this amount of time
     "timeout": "10s",
     // Address with pool coinbase wallet address.
@@ -338,11 +339,11 @@ Copy the following example
 ```
 [Unit]
 Description=Etherpool
-After=callisto.target
+After=perkle.target
 
 [Service]
 Type=simple
-ExecStart=/home/<your-user-name>/open-callisto-pool/build/bin/open-callisto-pool /home/<your-user-name>/open-callisto-pool/config.json
+ExecStart=/home/<your-user-name>/open-perkle-pool/build/bin/open-perkle-pool /home/<your-user-name>/open-perkle-pool/config.json
 
 [Install]
 WantedBy=multi-user.target
@@ -368,11 +369,11 @@ You can open firewall by opening 80,443,8080,8888,8008.
 
 ### Modify configuration file
 
-    $ nano ~/open-callisto-pool/www/config/environment.js
+    $ nano ~/open-perkle-pool/www/config/environment.js
 
 Make some modifications in these settings.
 
-    BrowserTitle: 'Callisto Mining Pool',
+    BrowserTitle: 'Perkle Mining Pool',
     ApiUrl: '//your-pool-domain/',
     HttpHost: 'http://your-pool-domain',
     StratumHost: 'your-pool-domain',
@@ -380,7 +381,7 @@ Make some modifications in these settings.
 
 The frontend is a single-page Ember.js application that polls the pool API to render miner stats.
 
-    $ cd ~/open-callisto-pool/www
+    $ cd ~/open-perkle-pool/www
     $ sudo npm install -g ember-cli@2.9.1
     $ sudo npm install -g bower
     $ sudo chown -R $USER:$GROUP ~/.npm
@@ -388,7 +389,7 @@ The frontend is a single-page Ember.js application that polls the pool API to re
     $ npm install
     $ bower install
     $ ./build.sh
-    $ cp -R ~/open-callisto-pool/www/dist ~/www
+    $ cp -R ~/open-perkle-pool/www/dist ~/www
 
 As you can see above, the frontend of the pool homepage is created. Then, move to the directory, www, which services the file.
 
@@ -475,7 +476,7 @@ Now you can access your pool's frontend via https! Share your pool link!
 ### Credits
 
 Made by sammy007. Licensed under GPLv3.
-Modified by Akira Takizawa & The Ellaism Project.
+Modified by Akira Takizawa & The Ellaism Project & The Esprezzo Team.
 
 #### Contributors
 
@@ -488,4 +489,3 @@ ETH/ETC/ETSC/CLO: 0x34AE12692BD4567A27e3E86411b58Ea6954BA773
 ![](https://cdn.pbrd.co/images/GP5tI1D.png)
 
 Highly appreciated.
-# open-perkle-pool

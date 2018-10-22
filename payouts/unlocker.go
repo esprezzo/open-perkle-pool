@@ -11,9 +11,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/math"
 
-	"github.com/chainkorea/open-callisto-pool/rpc"
-	"github.com/chainkorea/open-callisto-pool/storage"
-	"github.com/chainkorea/open-callisto-pool/util"
+	"github.com/esprezzo/open-perkle-pool/rpc"
+	"github.com/esprezzo/open-perkle-pool/storage"
+	"github.com/esprezzo/open-perkle-pool/util"
 )
 
 type UnlockerConfig struct {
@@ -337,7 +337,7 @@ func (u *BlockUnlocker) unlockPendingBlocks() {
 			entries = append(entries, fmt.Sprintf("\tREWARD %v: %v: %v Shannon", block.RoundKey(), login, reward))
 			per := new(big.Rat)
 			if val, ok := percents[login]; ok {
-					per = val
+				per = val
 			}
 			u.backend.WriteReward(login, reward, per, true, block)
 		}
@@ -493,10 +493,9 @@ func (u *BlockUnlocker) calculateRewards(block *storage.BlockData) (*big.Rat, *b
 	return revenue, minersProfit, poolProfit, rewards, percents, nil
 }
 
-func calculateRewardsForShares(shares map[string]int64, total int64, reward *big.Rat)(map[string]int64, map[string]*big.Rat) {
+func calculateRewardsForShares(shares map[string]int64, total int64, reward *big.Rat) (map[string]int64, map[string]*big.Rat) {
 	rewards := make(map[string]int64)
 	percents := make(map[string]*big.Rat)
-
 
 	for login, n := range shares {
 		percents[login] = big.NewRat(n, total)

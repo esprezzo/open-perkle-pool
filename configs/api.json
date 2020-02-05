@@ -53,9 +53,9 @@
     "luckWindow": [64, 128, 256],
     "payments": 50,
     "blocks": 50,
-    "poolCharts":"0 */20 * * * *",
+    "poolCharts":"*/20 * * * *",
     "poolChartsNum":74,
-    "minerCharts":"0 */20 * * * *",
+    "minerCharts":"*/20 * * * *",
     "minerChartsNum":74,
     "purgeOnly": false
   },

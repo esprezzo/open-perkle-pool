@@ -9,6 +9,7 @@
 
 **This pool is being further developed to provide an easy to use pool for Perkle miners. Testing and bug submissions are welcome!**
 
+* Updated to work with Perkle 0.2.1
 * Support for HTTP and Stratum mining
 * Detailed block stats with luck percentage and full reward
 * Failover geth instances: geth high availability built in
@@ -62,50 +63,8 @@ This will install the latest nodejs
     $ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
     $ sudo apt-get install -y nodejs
 
-### Install multi-geth
-
-    $ wget https://github.com/ethereumsocial/multi-geth/releases/download/v1.8.10/multi-geth-linux-v1.8.10.zip
-    $ unzip multi-geth-linux-v1.8.10.zip
-    $ sudo mv geth /usr/local/bin/geth
-
-### Run multi-geth
-
-If you use Ubuntu, it is easier to control services by using serviced.
-
-    $ sudo nano /etc/systemd/system/perkle.service
-
-Copy the following example
-
-```
-[Unit]
-Description=Perkle for Pool
-After=network-online.target
-
-[Service]
-ExecStart=/usr/local/bin/geth --perkle --cache=1024 --rpc --extradata "Mined by <your-pool-domain>" --ethstats "<your-pool-domain>:perkle@perlklestats.net"
-User=<your-user-name>
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Then run multi-geth by the following commands
-
-    $ sudo systemctl enable perkle
-    $ sudo systemctl start perkle
-
-If you want to debug the node command
-
-    $ sudo systemctl status perkle
-
-Run console
-
-    $ geth attach
-
-Register pool account and open wallet for transaction. This process is always required, when the wallet node is restarted.
-
-    > personal.newAccount()
-    > personal.unlockAccount(eth.accounts[0],"password",40000000)
+### Install Perkle Node 
+See https://github.com/esprezzo/perkle
 
 ### Install Perkle Pool
 
